@@ -1,0 +1,12 @@
+[
+    {
+        "description": "Shopping at Walmart",
+        "amount": 24.99,
+        "date": "2011-05-24"
+    },
+    {
+        "description": "Gas at Esso",
+        "amount": 50,
+        "date": "2011-05-24"
+    }
+]

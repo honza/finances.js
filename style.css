@@ -1,0 +1,23 @@
+#wrap {
+    width: 960px;
+    margin: 0 auto;
+    font-family: 'Helvetica Neue', 'Helvetica', sans;
+    font-size: 20px;
+}
+
+/* Entry */
+.date {
+    width: 100px;
+}
+
+.desc {
+    width: 600px;
+}
+
+.amount {
+    width: 80px;
+}
+
+.entry span {
+    display: inline-block;
+}
