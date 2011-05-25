@@ -5,19 +5,32 @@
     font-size: 20px;
 }
 
+#total {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #666;
+}
+
 /* Entry */
 .date {
     width: 100px;
 }
 
 .desc {
-    width: 600px;
+    width: 400px;
 }
 
 .amount {
-    width: 80px;
+    width: 150px;
 }
 
 .entry span {
     display: inline-block;
+}
+
+.entry input {
+    border: 1px solid #ececec;
+    font-size: 18px;
+    line-height: 20px;
+    font-family: 'Helvetica Neue', 'Helvetica', sans;
 }

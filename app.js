@@ -44,11 +44,13 @@
 
       addOne: function(entry) {
         var view = new EntryView({model: entry});
-        // replace $() with this.el
-        $('#app').append(view.render().el);
+        this.$('#entries').append(view.render().el);
       },
 
       render: function() {
+        // add up all the amounts
+        var total = this.entries.getTotal();
+        this.$('#total .amount').html('$ ' + total);
       }
 
     });
@@ -81,7 +83,16 @@
 
     var EntryList = Backbone.Collection.extend({
       model: Entry,
-      url: '/data/finances.json'
+      url: '/data/finances.json',
+
+      // add up all the amounts for all entries
+      getTotal: function() {
+        var t = 0;
+        this.each(function(item) {
+          t += item.get('amount');
+        });
+        return t;
+      }
     });
 
     // Start the engines
