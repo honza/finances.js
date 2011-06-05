@@ -5,7 +5,6 @@
 
 (function($) {
 
-
   $(function() {
 
     // Models
@@ -14,9 +13,11 @@
       initialize: function() {
         // parse date
         var d = this.get('date');
-        d = d.split('-');
-        d = new Date(d[0], d[1], d[2]);
-        var added = d.getMonth() + '/' + d.getDate() + '/' + d.getFullYear();
+        if (!(d instanceof Date)) {
+          d = d.split('-');
+          d = new Date(d[0], (d[1] - 1), d[2]);
+          }
+        var added = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
         this.set({added: added});
       }
     });
@@ -27,6 +28,10 @@
 
       el: $('#app'),
 
+      events: {
+        'click #submit-button': 'submit'
+      },
+
       initialize: function() {
         _.bindAll(this, 'addAll', 'addOne', 'render');
 
@@ -36,6 +41,9 @@
         this.entries.bind('all', this.render);
 
         this.entries.fetch();
+
+        this.description = this.$('#entry-form .desc input');
+        this.amount = this.$('#entry-form .amount input');
       },
 
       addAll: function() {
@@ -51,6 +59,20 @@
         // add up all the amounts
         var total = this.entries.getTotal();
         this.$('#total .amount').html('$ ' + total);
+      },
+
+      submit: function() {
+        // create a new model, add it to the collection
+        var e = new Entry({
+          description: this.description.val(),
+          amount: parseFloat(this.amount.val(), 10),
+          date: new Date
+        });
+        // add it to the collection
+        this.entries.add(e);
+        // clear the form
+        this.description.val('');
+        this.amount.val('');
       }
 
     });
@@ -91,7 +113,7 @@
         this.each(function(item) {
           t += item.get('amount');
         });
-        return t;
+        return Math.round(t*100) / 100;
       }
     });
 
