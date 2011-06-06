@@ -77,7 +77,9 @@
       template: _.template($('#entry-template').html()),
 
       events: {
-        'click input.delete': 'deleteEntry'
+        'click input.delete': 'deleteEntry',
+        'focus span.amount': 'amountFocus',
+        'blur span.amount': 'amountBlur'
       },
 
       initialize: function() {
@@ -94,6 +96,19 @@
       render: function() {
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
+      },
+
+      amountFocus: function() {
+        this.before = this.$('span.amount').text();
+      },
+
+      amountBlur: function() {
+        var now = this.$('span.amount').text();
+        if (this.before != now) {
+          now = parseFloat(now, 10);
+          this.model.set({amount: now});
+          this.model.save();
+        }
       }
 
     });
