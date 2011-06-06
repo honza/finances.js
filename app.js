@@ -11,14 +11,11 @@
 
     var Entry = Backbone.Model.extend({
       initialize: function() {
-        // parse date
-        var d = this.get('date');
-        if (!(d instanceof Date)) {
-          d = d.split('-');
-          d = new Date(d[0], (d[1] - 1), d[2]);
-          }
-        var added = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
-        this.set({added: added});
+        var d = new Date(this.get('date'));
+        var x = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+        this.set({
+          humanDate: x
+        });
       }
     });
 
@@ -63,13 +60,11 @@
 
       submit: function() {
         // create a new model, add it to the collection
-        var e = new Entry({
+        this.entries.create({
           description: this.description.val(),
           amount: parseFloat(this.amount.val(), 10),
           date: new Date
         });
-        // add it to the collection
-        this.entries.add(e);
         // clear the form
         this.description.val('');
         this.amount.val('');
@@ -82,7 +77,7 @@
       template: _.template($('#entry-template').html()),
 
       events: {
-        'click a': 'clicked'
+        'click input.delete': 'deleteEntry'
       },
 
       initialize: function() {
@@ -91,7 +86,9 @@
         this.model.view = this;
       },
 
-      clicked: function() {
+      deleteEntry: function() {
+        this.model.destroy();
+        this.remove();
       },
 
       render: function() {
@@ -105,7 +102,8 @@
 
     var EntryList = Backbone.Collection.extend({
       model: Entry,
-      url: '/data/finances.json',
+      //url: '/data/finances.json',
+      localStorage: new Store('finances'),
 
       // add up all the amounts for all entries
       getTotal: function() {

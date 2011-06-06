@@ -6,6 +6,7 @@
      <script src="jquery.js" type="text/javascript"></script>
      <script src="underscore.js" type="text/javascript"></script>
      <script src="backbone.js" type="text/javascript"></script>
+     <script src="backbone-localstorage.js" type="text/javascript"></script>
      <script src="app.js" type="text/javascript"></script>
 </head>
 <body>
@@ -29,10 +30,12 @@
 
     <script type="text/template" id="entry-template">
         <div class="entry">
-            <span class="date"><%= added %></span>
+            <span class="date"><%= humanDate %></span>
             <span class="desc"><%= description %></span>
             <span class="amount">$ <%= amount %></span>
-            <span class="actions">Edit Delete</span>
+            <span class="actions">
+                <input type="button" class="delete" value="Delete" />
+            </span>
         </div>
     </script>
 </body>
