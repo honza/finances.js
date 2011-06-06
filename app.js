@@ -3,7 +3,7 @@
 //
 // Finances is a small, proof-of-concept application to show off some of the
 // cool functionality that [Backbone.js](http://documentcloud.github.com/backbone/)
-// can provide. The code is freely distrubutable under the terms of the BSD
+// can provide. The code is freely distributable under the terms of the BSD
 // license.
 
 
