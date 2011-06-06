@@ -28,7 +28,7 @@
     display: inline-block;
 }
 
-.entry input {
+.entry .amount input, .entry .desc input {
     border: 1px solid #ececec;
     font-size: 18px;
     line-height: 20px;
