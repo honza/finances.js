@@ -79,7 +79,9 @@
       events: {
         'click input.delete': 'deleteEntry',
         'focus span.amount': 'amountFocus',
-        'blur span.amount': 'amountBlur'
+        'blur span.amount': 'amountBlur',
+        'focus span.desc': 'descFocus',
+        'blur span.desc': 'descBlur'
       },
 
       initialize: function() {
@@ -99,14 +101,28 @@
       },
 
       amountFocus: function() {
-        this.before = this.$('span.amount').text();
+        this.amountBefore = this.$('span.amount').text();
       },
 
       amountBlur: function() {
         var now = this.$('span.amount').text();
-        if (this.before != now) {
+        if (this.amountBefore != now) {
           now = parseFloat(now, 10);
           this.model.set({amount: now});
+          this.model.save();
+        }
+      },
+
+      descFocus: function() {
+          this.descBefore = this.$('span.desc').text();
+      },
+
+      descBlur: function() {
+        var now = this.$('span.desc').text();
+        if (this.descBefore != now) {
+          this.model.set({
+            description: now
+          });
           this.model.save();
         }
       }
