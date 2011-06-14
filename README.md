@@ -13,4 +13,10 @@ Features
 * Automatically update totals
 * Saves in `localStorage`
 
+Annotated source
+----------------
+
+[Source][source]
+
 [backbone]: http://documentcloud.github.com/backbone/
+[source]: http://honza.github.com/finances.js/
